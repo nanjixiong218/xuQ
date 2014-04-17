@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    my util !!
+    </title>
+    <script type="text/javascript" src="/xuQ/xuQ1.1.0.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+            var p = document.getElementById("p");
+            xuQ().addEventHandler(p,"click",function(event){
+                alert(xuQ().version);
+                var target = xuQ().getTarget();
+                alert(target.innerText);
+            });
+
+        }
+    </script>
+</head>
+<body>
+<p id="p">my name is xu!</p>
+</body>
+</html>
