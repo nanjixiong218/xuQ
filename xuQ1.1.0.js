@@ -107,7 +107,79 @@
             }else{
                 throw new Error("Can not serialize XML Dom");
             }
+        },
+        //计算小工具
+        //计算数字数组的最大值，
+        maxArrayUseEval:function (inArray){
+            var s = inArray.join();
+            return	eval('Math.max('+s+')');
+        },
+        maxArrayUseApply:function (inArray){
+            return Math.max.apply(null,inArray);
+        },
+        //转化一个数字数组为function数组（每个function都弹出相应的数字）
+        transArrayToFunctionArray:function (inArray){
+            if(inArray.length){
+
+                var i =0;
+                for(i=0;i<inArray.length;i++){
+                    inArray[i]=function(num){
+                        return function(){
+                            alert(num);
+                        }
+                    }(inArray[i]);
+                }
+
+            }else{
+                return false;
+            }
+        },
+        //给object数组进行排序（排序条件是每个元素对象的属性个数）
+        sortObject:function (objArray){
+        count(objArray);
+        var i=0;
+        objArray.sort(function(a,b){
+            return b.count-a.count;
+        });
+        function count(objArray){
+            var i = 0,
+            count=0;
+            if(objArray.length){
+                for(i=0;i<objArray.length;i++){
+                    for(el in objArray[i]){
+                        count++;
+                    }
+                    objArray[i].count=count;
+                    count=0;
+                }
+              }
+            }
+         },
+        Fibonacci:function fb(n){//用匿名函数表达式实现递归
+            if(n==0) return 0;
+            if(n==1) return 1;
+            return fb(n-1)+fb(n-2);
+        },
+        //三个数相加的add语法糖：var a = add(2)(3)(4); //9
+        add:function (a){
+            return function(b){
+                return function(c){
+                    return a+b+c;
+                }
+            }
+        },
+        //任意个数相加的语法糖，方法不是很好
+        addAny:function Add(n){
+            Add.sum=Add.sum?Add.sum+n:n;
+            Add.toString=function(){return Add.sum;}
+            Add.valueOf=function(){return Add.sum;}
+            return arguments.callee;
         }
+
+
+
+
+
     };
     xuQ.fn.init.prototype = xuQ.fn;
 
