@@ -8,6 +8,14 @@
             this.alias = "xuQ";
             this.version = "version1.1.0";
             this.describe = "this is my own javascript util just like jquery ";
+            this.regExps = {
+                searchIP:/(?<![\d.])(([01]?\d\d?\|2[0-4]\d|25[0-5])\.){4}(?![\d.])/,
+                isIP:/^(([01]?\d\d?\|2[0-4]\d|25[0-5])\.){4}$/,
+                searchPath:/(((.*)\/([^/.]*)|([^/]*))\.(txt|js|css|html))/,//查询带扩展名的比较好
+                isPath:/^(.*)\/([^/]*)|[^/]*]$/,
+                oneDeepkuohao:/(\([^()]*(\([^()]*\))[^()]*\))]/, //查找一层嵌套的括号匹配问题,$1=外层括号内容，$2=内层括号内容
+                txtInSeperator:/"([\\.]|[^\\"])*"///匹配分隔符内的内容，以“”为分隔符为例,转义的双引号也可以匹配
+            }
         },
         addEventHandler:function(element,type,handler){
             if(element.addEventListener){//非IE
