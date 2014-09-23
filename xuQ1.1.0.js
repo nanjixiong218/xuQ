@@ -69,9 +69,7 @@
             }
         },
         createDocument:function(){
-            if(typeof XMLHttpRequest !="undefined"){//IE7+,Firefox,chrome
-                return new XMLHttpRequest();
-            }else if(typeof arguments.callee.activeXString!='string'){//说明是第一次调用（IE7之前版本）
+            if(typeof arguments.callee.activeXString!='string'){//说明是第一次调用（IE7之前版本）
                 var  versions=["MSXML2.DOMDocument","MSXML2.DOMDocument.3.0","MSXML2.DOMDocument.6.0"];//简单优化，把最新的放在最后，然后从最后遍历
                 var i;
                 for(i=versions.length-1;i>=0;i--){
@@ -92,7 +90,7 @@
         parseXml:function(xml){//反序列化xml
             var xmlDom =null;
             if(typeof DOMParser !="undefined"){
-                xmlDom = (new DOMParser()).parseFromString(xml,"text.xml");
+                xmlDom = (new DOMParser()).parseFromString(xml,"text/xml");
                 var errors = xmlDom.getElementsByTagName("parsererror");//居然是parsererror而不是parseerror/找不到是返回undefined么？
                 if(errors.length){
                     throw new Error("XML parsing error:"+errors[0].textContent);
@@ -169,7 +167,7 @@
             if(n==1) return 1;
             return fb(n-1)+fb(n-2);
         },
-        //三个数相加的add语法糖：var a = add(2)(3)(4); //9
+        //三个数相加的add语法糖：var a = add(2)(3)(4); //9 Todo curring
         add:function (a){
             return function(b){
                 return function(c){
